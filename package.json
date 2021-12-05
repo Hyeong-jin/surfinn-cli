@@ -1,0 +1,169 @@
+{
+  "name": "surfinn-cli",
+  "version": "0.0.1",
+  "description": "Surfinn-cli is a tool for creating react apps and provides a awesome generator for components, services, screens(pages), models, stores and layouts as fully customizable templates.",
+  "bin": {
+    "surfinn": "bin/surfinn",
+    "surfinn-cli": "bin/surfinn"
+  },
+  "preferGlobal": true,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hyeong-jin/surfinn-cli.git"
+  },
+  "homepage": "https://github.com/Hyeong-jin/surfinn-cli#readme",
+  "bugs": {
+    "url": "https://github.com/Hyeong-jin/surfinn-cli/issues"
+  },
+  "files": [
+    "templates",
+    "build",
+    "bin",
+    "README.md",
+    "template.config.js"
+  ],
+  "keywords": [
+    "surfinn",
+    "surfinn-cli",
+    "surfinn-react-app",
+    "surfinn-generator",
+    "react",
+    "react-app-template",
+    "template"
+  ],
+  "author": {
+    "name": "Innerwave Surfinn",
+    "email": "hjyong@innerwave.co.kr",
+    "url": "http://surfinn.innerwave.co.kr"
+  },
+  "scripts": {
+    "compile": "tsc -p .",
+    "build": "yarn compile && cp ./boilerplate/.gitignore ./boilerplate/.gitignore.template",
+    "format": "npm-run-all format:*",
+    "format:js": "prettier --write '**/*.js'",
+    "format:json": "prettier --write '**/*.json'",
+    "format:md": "prettier --write '**/*.md'",
+    "format:ts": "prettier --write '**/*.ts{,x}'",
+    "lint": "eslint src test --ext .ts --fix && yarn format",
+    "test": "yarn build && yarn lint && jest --runInBand && yarn clean",
+    "watch": "jest --runInBand --watch",
+    "coverage": "jest --runInBand --coverage",
+    "ci:lint": "eslint src test --ext .ts && yarn format",
+    "ci:test": "yarn build && yarn ci:lint && jest --runInBand && yarn clean",
+    "ci:publish": "yarn build && yarn semantic-release && yarn clean",
+    "semantic-release": "semantic-release",
+    "clean": "rm -rf ./build && rm ./boilerplate/.gitignore.template"
+  },
+  "dependencies": {
+    "deepmerge-json": "^1.1.0",
+    "gluegun": "^4.5.0"
+  },
+  "devDependencies": {
+    "@semantic-release/git": "^9.0.0",
+    "@types/jest": "^27.0.1",
+    "@types/node": "16.6.1",
+    "@typescript-eslint/eslint-plugin": "^4.19.0",
+    "@typescript-eslint/parser": "^4.19.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.23.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "husky": "^7.0.1",
+    "jest": "^27.0.6",
+    "npm-run-all": "4.1.5",
+    "prettier": "2.3.2",
+    "semantic-release": "^17.4.2",
+    "strip-ansi": "^6.0.0",
+    "ts-jest": "^27.0.4",
+    "ts-node": "^10.2.0",
+    "typescript": "^4.1.3"
+  },
+  "devEngines": {
+    "node": ">=7.x",
+    "npm": ">=4.x"
+  },
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "extends": [
+      "prettier",
+      "plugin:@typescript-eslint/recommended",
+      "standard"
+    ],
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "globals": {
+      "__DEV__": false,
+      "jasmine": false,
+      "beforeAll": false,
+      "afterAll": false,
+      "beforeEach": false,
+      "afterEach": false,
+      "test": false,
+      "expect": false,
+      "describe": false,
+      "jest": false,
+      "it": false
+    },
+    "rules": {
+      "@typescript-eslint/ban-ts-ignore": 0,
+      "@typescript-eslint/explicit-function-return-type": 0,
+      "@typescript-eslint/explicit-member-accessibility": 0,
+      "@typescript-eslint/explicit-module-boundary-types": 0,
+      "@typescript-eslint/indent": 0,
+      "@typescript-eslint/member-delimiter-style": 0,
+      "@typescript-eslint/no-empty-interface": 0,
+      "@typescript-eslint/no-explicit-any": 0,
+      "@typescript-eslint/no-object-literal-type-assertion": 0,
+      "@typescript-eslint/no-var-requires": 0,
+      "comma-dangle": 0,
+      "multiline-ternary": 0,
+      "no-undef": 0,
+      "no-unused-vars": 0,
+      "no-use-before-define": "off",
+      "quotes": 0,
+      "space-before-function-paren": 0
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/npm",
+      "@semantic-release/github",
+      [
+        "@semantic-release/git",
+        {
+          "assets": "package.json",
+          "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        }
+      ]
+    ]
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/templates/"
+    ],
+    "testEnvironment": "node",
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx"
+    ]
+  }
+}

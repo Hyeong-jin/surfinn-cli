@@ -1,0 +1,42 @@
+{
+  "common": {
+    "ok": "OK!",
+    "cancel": "Cancel",
+    "back": "Back"
+  },
+  "errors": {
+    "invalidEmail": "올바른 이메일 주소가 아닙니다."
+  },
+  "welcomeScreen": {
+    "poweredBy": "이그나이트로 만들었어요",
+    "readyForLaunch": "런칭 준비되었습니다.",
+    "continue": "계속",
+    "demo": "DEMO",
+    "uidemo": "UI COMPONENTS"
+  },
+  "demoScreen": {
+    "howTo": "사용방법",
+    "title": "여기에 있는 스택은 무엇인가?",
+    "tagLine": "축하해, 당신은 매우 고급의 리액트 네이티브 앱 템플릿을 얻었다. 이 템플릿의 어드밴티지를 누리세요!",
+    "reactotron": "리액토트론 예제 실행",
+    "demoList": "리스트 예제 보기",
+    "androidReactotronHint": "그래도 작동하지 않으면 Reactotron 데스크톱 앱이 실행 중인지 확인하고 터미널에서 `adb reverse tcp:9090 tcp:9090`을 실행한 다음 앱을 다시 로드합니다.",
+    "iosReactotronHint": "작동하지 않는다면, 리액토트론 데스크탑 어플리케이션이 실행되었는지 확인하세요.",
+    "macosReactotronHint": "작동하지 않는다면, 리액토트론 데스크탑 어플리케이션이 실행되었는지 확인하세요.",
+    "webReactotronHint": "작동하지 않는다면, 리액토트론 데스크탑 어플리케이션이 실행되었는지 확인하세요.",
+    "windowsReactotronHint": "작동하지 않는다면, 리액토트론 데스크탑 어플리케이션이 실행되었는지 확인하세요."
+  },
+  "demoListScreen": {
+    "title": "리스트 예제"
+  },
+  "errorScreen": {
+    "title": "뭔가 잘못됬어요!",
+    "friendlySubtitle": "이 화면은 프로덕션에서 에러가 발생했을 때 사용자가 보게 됩이다. 이 메시지(`app/i18n/[LOCAL].json`)와  레이아웃(`app/screens/error`)을 앱에 맞게 커스터마이징 하세요. 이를 완전히 제거하려면, <ErrorBoundary> 컴포넌트에 대한 `app/app.tsx`를 확인하세요.",
+    "traceTitle": "%{name}에서 애러 발생 :",
+    "reset": "앱 재설정합니다."
+  },
+  "storybook": {
+    "placeholder": "플레이스홀더",
+    "field": "필드"
+  }
+}

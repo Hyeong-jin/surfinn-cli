@@ -1,0 +1,113 @@
+import { ApiResponse } from "apisauce";
+import { Api } from "../api/api";
+import { getGeneralApiProblem } from "../api/api-problem";
+import { <%= props.pascalCaseName %> } from '@models';
+import { 
+  Get<%= props.pascalCaseName %>sResult,
+  Get<%= props.pascalCaseName %>Result,
+  Post<%= props.pascalCaseName %>Result,
+  Update<%= props.pascalCaseName %>Result,
+  Delete<%= props.pascalCaseName %>Result
+ } from "./<%= props.kebabCaseName %>-result-types";
+
+export class <%= props.pascalCaseName %>Api {
+  private api: Api;
+
+  constructor(api: Api) {
+    this.api = api;
+  }
+
+  async get<%= props.pascalCaseName %>s(): Promise<Get<%= props.pascalCaseName %>sResult> {
+    try {
+      const url = '/<%= props.snakeCaseName %>';
+      const params = {};
+      const response: ApiResponse<any> = await this.api.apisauce.get( url, params );
+  
+      if (!response.ok) {
+        const problem = getGeneralApiProblem(response);
+        if (problem) return problem;
+      }
+
+      const <%= props.camelCaseName %>s: <%= props.pascalCaseName %>[] = response.data.results;
+      return { kind: "ok", <%= props.camelCaseName %>s };
+
+    } catch (e) {
+      return { kind: "bad-data" };
+    }
+  }
+
+  async get<%= props.pascalCaseName %>(id:number): Promise<Get<%= props.pascalCaseName %>Result> {
+    try {
+      const url = `/<%= props.snakeCaseName %>/${id}`;
+      const params = {};
+      const response: ApiResponse<any> = await this.api.apisauce.get( url, params );
+  
+      if (!response.ok) {
+        const problem = getGeneralApiProblem(response);
+        if (problem) return problem;
+      }
+
+      const <%= props.camelCaseName %>:<%= props.pascalCaseName %> = response.data.results;
+      return { kind: "ok", <%= props.camelCaseName %> };
+
+    } catch (e) {
+      return { kind: "bad-data" };
+    }
+  }
+
+  async post<%= props.pascalCaseName %>(): Promise<Post<%= props.pascalCaseName %>Result> {
+    try {
+      const url = '/<%= props.snakeCaseName %>';
+      const payload = {};
+      const response: ApiResponse<any> = await this.api.apisauce.post( url, payload );
+  
+      if (!response.ok) {
+        const problem = getGeneralApiProblem(response);
+        if (problem) return problem;
+      }
+
+      const <%= props.camelCaseName %>:<%= props.pascalCaseName %> = response.data.results;
+      return { kind: "ok", <%= props.camelCaseName %> };
+
+    } catch (e) {
+      return { kind: "bad-data" };
+    }
+  }
+
+  async update<%= props.pascalCaseName %>(id:number): Promise<Update<%= props.pascalCaseName %>Result> {
+    try {
+      const url = `/<%= props.snakeCaseName %>/${id}`;
+      const payload = {};
+      const response: ApiResponse<any> = await this.api.apisauce.put( url, payload );
+  
+      if (!response.ok) {
+        const problem = getGeneralApiProblem(response);
+        if (problem) return problem;
+      }
+
+      const <%= props.camelCaseName %>:<%= props.pascalCaseName %> = response.data.results;
+      return { kind: "ok", <%= props.camelCaseName %> };
+
+    } catch (e) {
+      return { kind: "bad-data" };
+    }
+  }
+
+  async delete<%= props.pascalCaseName %>(id:number): Promise<Delete<%= props.pascalCaseName %>Result> {
+    try {
+      const url = `/<%= props.snakeCaseName %>/${id}`;
+      const payload = {};
+      const response: ApiResponse<any> = await this.api.apisauce.delete( url, payload );
+  
+      if (!response.ok) {
+        const problem = getGeneralApiProblem(response);
+        if (problem) return problem;
+      }
+
+      return { kind: "ok" };
+
+    } catch (e) {
+      return { kind: "bad-data" };
+    }
+ }
+}

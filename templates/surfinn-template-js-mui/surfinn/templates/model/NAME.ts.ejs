@@ -1,0 +1,53 @@
+import { Instance, SnapshotOut, types } from "mobx-state-tree"
+<% if (props.isStore) { %>
+  import { withEnvironment } from "@models/extensions/with-environment"; 
+  import { 
+    <%= props.pascalCaseModelName %>Model, 
+    <%= props.pascalCaseModelName %>Snapshot 
+  } from "@models"; 
+  import { 
+    <%= props.pascalCaseModelName %>Api, 
+    Get<%= props.pascalCaseModelName %>sResult 
+  } from "@services"; 
+<% } %>
+
+/**
+ * Model description here for TypeScript hints.
+ */
+export const <%= props.pascalCaseName %>Model = types
+  .model("<%= props.pascalCaseName %>")
+  <% if (props.isStore) { %>.props({
+    <%= props.camelCaseModelName %>s : types.optional(types.array(<%= props.pascalCaseModelName%>Model), []),
+  })
+  .extend(withEnvironment)
+  .views((self) => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
+  // MUTATEs
+  .actions((self) => ({
+    set<%= props.pascalCaseModelName%>s: (<%= props.camelCaseModelName %>Snapshots: <%= props.pascalCaseModelName %>Snapshot[]) => {
+      self.<%= props.camelCaseModelName %>s.replace(<%= props.camelCaseModelName %>Snapshots);
+    },
+  })) 
+  // CALL REST APIs
+  .actions((self) => ({
+    get<%= props.pascalCaseModelName %>s: async () => {
+      const <%= props.camelCaseModelName %>Api : <%= props.pascalCaseModelName %>Api = new <%= props.pascalCaseModelName %>Api(self.environment.api);
+      const result:Get<%= props.pascalCaseModelName %>sResult = await <%= props.camelCaseModelName %>Api.get<%= props.pascalCaseModelName %>s();
+      if (result.kind === 'ok') {
+        self.set<%= props.pascalCaseModelName %>s(result.<%= props.camelCaseModelName %>s);
+      } else {
+        console.log(result.kind);
+      }
+    }
+  }))
+  <% } else { %>.props({
+    id: types.maybe(types.identifierNumber)
+  })
+  .views((self)   => ({}))   // eslint-disable-line @typescript-eslint/no-unused-vars
+  .actions((self) => ({})) // eslint-disable-line @typescript-eslint/no-unused-vars
+  <% } %>
+
+type <%= props.pascalCaseName %>Type = Instance<typeof <%= props.pascalCaseName %>Model>
+export interface <%= props.pascalCaseName %> extends <%= props.pascalCaseName %>Type {}
+type <%= props.pascalCaseName %>SnapshotType = SnapshotOut<typeof <%= props.pascalCaseName %>Model>
+export interface <%= props.pascalCaseName %>Snapshot extends <%= props.pascalCaseName %>SnapshotType {}
+export const create<%= props.pascalCaseName %>DefaultModel = () => types.optional(<%= props.pascalCaseName %>Model, {})
