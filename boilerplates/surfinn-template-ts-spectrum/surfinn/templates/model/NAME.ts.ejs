@@ -51,3 +51,4 @@ export interface <%= props.pascalCaseName %> extends <%= props.pascalCaseName %>
 type <%= props.pascalCaseName %>SnapshotType = SnapshotOut<typeof <%= props.pascalCaseName %>Model>
 export interface <%= props.pascalCaseName %>Snapshot extends <%= props.pascalCaseName %>SnapshotType {}
 export const create<%= props.pascalCaseName %>DefaultModel = () => types.optional(<%= props.pascalCaseName %>Model, {})
+export type <%= props.pascalCaseName %>Keys = keyof <%= props.pascalCaseName %>SnapshotType & string;
