@@ -60,10 +60,11 @@ export default {
     //   p(cyan(`npx ignite-cli@3 new ${projectName} --boilerplate ${bname}`));
     //   process.exit(1);
     // }
+
     const tplName =
       parameters.options.tpl ||
       parameters.options.template ||
-      'surfinn-template-ts';
+      'surfinn-template-ts-mui';
 
     // debug?
     const debug = Boolean(parameters.options.debug);
